@@ -505,8 +505,8 @@ def experiment(setup, runs, summary_print=False, runs_print=False, latex_print=F
 
 def setups(horizon, runs, summary_print=False, runs_print=False, latex_print=False, bar_print=False):
 
-    setup = MDP(3.26, 0.34, 0.15, horizon)
-    at_total_1, at_stats_1, occ_stats_1 = experiment(setup, runs, summary_print, runs_print, latex_print)
+    # setup = MDP(3.26, 0.34, 0.15, horizon)
+    # at_total_1, at_stats_1, occ_stats_1 = experiment(setup, runs, summary_print, runs_print, latex_print)
 
     # setup = MDP(2.93, 0.37, 0.15, horizon)
     # at_total_2, at_stats_2, occ_stats_2 = experiment(setup, runs, summary_print, runs_print, latex_print)
