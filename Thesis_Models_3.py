@@ -750,9 +750,9 @@ def experiments_2(setup, policy, runs, summary_print=False, runs_print=False, ba
             setup.bar("Free selection", free_sel_at_total, free_sel_at_stats, free_sel_occ_stats)
 
 
-setup_1 = SimModel(3.26, 0.34, 0.15)
+# setup_1 = SimModel(3.26, 0.34, 0.15)
 # setup_2 = SimModel(2.93, 0.37, 0.15)
-setup_3 = SimModel(2.61, 0.41, 0.15)
-experiments_2(setup_1, 1, 10, True, True, False, True)    # Policy 1=no_res, 2=cons_res, 3=incr_res, 4=free_sel, 5=all
+# setup_3 = SimModel(2.61, 0.41, 0.15)
+#experiments_2(setup_1, 1, 10, True, True, False, True)    # Policy 1=no_res, 2=cons_res, 3=incr_res, 4=free_sel, 5=all
 # experiments_2(setup_2, 4, 10, True, True, True, True)    # Policy 1=no_res, 2=cons_res, 3=incr_res, 4=free_sel, 5=all
-experiments_2(setup_3, 1, 10, True, True, False, True)   # Policy 1=no_res, 2=cons_res, 3=incr_res, 4=free_sel, 5=all
+# experiments_2(setup_3, 1, 10, True, True, False, True)   # Policy 1=no_res, 2=cons_res, 3=incr_res, 4=free_sel, 5=all
