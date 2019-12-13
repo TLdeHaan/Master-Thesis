@@ -82,8 +82,8 @@ class MDP:
 
         for i in range(0, S_num_small, self.Patients):
             C_small[i] = np.array([(list([999999]) * (A_num - 1) + [0])])
-            C_small[i + 1] = np.array([[0] * (A_num - 1) + [90]])
-            C_small[i + 2] = np.array([list(range(0, (A_num - 1) * 4, 4)) + [90]])
+            C_small[i + 1] = np.array([[0] * (A_num - 1) + [60]])
+            C_small[i + 2] = np.array([list(range(0, (A_num - 1) * 4, 4)) + [60]])
             print(S_num_small)
             print(A_num)
             print(C_small.shape)
@@ -91,7 +91,7 @@ class MDP:
                 for j in range(self.lim_u + 1, A_num - 1):
                     C_small[i + 2][j] = C_small[i + 2][j] * (j - self.lim_u) * 4
             if self.Patients == 4:
-                C_small[i + 3] = np.array([list(range(A_num - 1)) + [90]])
+                C_small[i + 3] = np.array([list(range(A_num - 1)) + [60]])
                 for j in range(20, A_num - 1):
                     C_small[i + 3][j] = C_small[i + 3][j] + (j - 19)
         for j, s in enumerate(S_small):
