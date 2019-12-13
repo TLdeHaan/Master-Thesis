@@ -84,9 +84,6 @@ class MDP:
             C_small[i] = np.array([(list([999999]) * (A_num - 1) + [0])])
             C_small[i + 1] = np.array([[0] * (A_num - 1) + [60]])
             C_small[i + 2] = np.array([list(range(0, (A_num - 1) * 4, 4)) + [60]])
-            print(S_num_small)
-            print(A_num)
-            print(C_small.shape)
             if A_num > self.lim_u:
                 for j in range(self.lim_u + 1, A_num - 1):
                     C_small[i + 2][j] = C_small[i + 2][j] * (j - self.lim_u) * 4
