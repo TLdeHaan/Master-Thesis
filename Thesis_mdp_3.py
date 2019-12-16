@@ -39,12 +39,19 @@ class MDP:
             self.Patients += 1
         if self.labda_new > 0:
             self.Patients += 1
-
-        self.p_no = (((self.labda_sum / self.K) ** 0) / factorial(0)) * exp(-self.labda_sum / self.K)
-        self.p_arr = 1 - self.p_no
-        self.p_fup = (self.p_arr / self.labda_sum) * self.labda_fup
-        self.p_urg = (self.p_arr / self.labda_sum) * self.labda_urg
-        self.p_new = (self.p_arr / self.labda_sum) * self.labda_new
+        
+        if alt_p:
+            self.p_fup = self.labda_fup / self.K
+            self.p_urg = self.labda_urg / self.K
+            self.p_new = self.labda_new / self.K
+            self.p_arr = self.p_fup + self.p_urg + self.new
+            self.p_no = 1 - self.p_arr
+        else:
+            self.p_no = (((self.labda_sum / self.K) ** 0) / factorial(0)) * exp(-self.labda_sum / self.K)
+            self.p_arr = 1 - self.p_no
+            self.p_fup = (self.p_arr / self.labda_sum) * self.labda_fup
+            self.p_urg = (self.p_arr / self.labda_sum) * self.labda_urg
+            self.p_new = (self.p_arr / self.labda_sum) * self.labda_new
         self.p_all = [self.p_no, self.p_fup, self.p_urg, self.p_new]
 
     def state_space(self):
@@ -82,13 +89,13 @@ class MDP:
 
         for i in range(0, S_num_small, self.Patients):
             C_small[i] = np.array([(list([999999]) * (A_num - 1) + [0])])
-            C_small[i + 1] = np.array([[0] * (A_num - 1) + [60]])
-            C_small[i + 2] = np.array([list(range(0, (A_num - 1) * 4, 4)) + [60]])
+            C_small[i + 1] = np.array([[0] * (A_num - 1) + [21]])
+            C_small[i + 2] = np.array([list(range(0, (A_num - 1) * 4, 4)) + [21]])
             if A_num > self.lim_u:
                 for j in range(self.lim_u + 1, A_num - 1):
                     C_small[i + 2][j] = C_small[i + 2][j] * (j - self.lim_u) * 4
             if self.Patients == 4:
-                C_small[i + 3] = np.array([list(range(A_num - 1)) + [60]])
+                C_small[i + 3] = np.array([list(range(A_num - 1)) + [21]])
                 for j in range(20, A_num - 1):
                     C_small[i + 3][j] = C_small[i + 3][j] + (j - 19)
         for j, s in enumerate(S_small):
@@ -500,15 +507,15 @@ def experiment(setup, runs, summary_print=False, runs_print=False, latex_print=F
     return at_total, at_stats, occ_stats
 
 
-def setups(horizon, runs, summary_print=False, runs_print=False, latex_print=False, bar_print=False):
+def setups(horizon, runs, summary_print=False, runs_print=False, latex_print=False, bar_print=False, alt_p):
 
-    # setup = MDP(3.26, 0.34, 0.15, horizon)
+    # setup = MDP(3.26, 0.34, 0.15, alt_p, horizon)
     # at_total_1, at_stats_1, occ_stats_1 = experiment(setup, runs, summary_print, runs_print, latex_print)
 
-    # setup = MDP(2.93, 0.37, 0.15, horizon)
+    # setup = MDP(2.93, 0.37, 0.15, alt_p, horizon)
     # at_total_2, at_stats_2, occ_stats_2 = experiment(setup, runs, summary_print, runs_print, latex_print)
 
-    # setup = MDP(2.61, 0.41, 0.15, horizon)
+    # setup = MDP(2.61, 0.41, 0.15, alt_p, horizon)
     # at_total_3, at_stats_3, occ_stats_3 = experiment(setup, runs, summary_print, runs_print, latex_print)
 
     if bar_print:
@@ -517,4 +524,4 @@ def setups(horizon, runs, summary_print=False, runs_print=False, latex_print=Fal
         # setup.bar("MDP", at_total_3, at_stats_3, occ_stats_3)
         pass
 
-setups(5, 10, True, True, True, True)
+setups(5, 10, True, True, True, True, True)
