@@ -22,7 +22,7 @@ class MDP:
     lim_u = 6
     lim_n = 20
 
-    def __init__(self, fup, urg, new, horizon):
+    def __init__(self, fup, urg, new, alt_p, horizon):
         self.labda_fup = fup
         self.labda_urg = urg
         self.labda_new = new
@@ -44,7 +44,7 @@ class MDP:
             self.p_fup = self.labda_fup / self.K
             self.p_urg = self.labda_urg / self.K
             self.p_new = self.labda_new / self.K
-            self.p_arr = self.p_fup + self.p_urg + self.new
+            self.p_arr = self.p_fup + self.p_urg + self.p_new
             self.p_no = 1 - self.p_arr
         else:
             self.p_no = (((self.labda_sum / self.K) ** 0) / factorial(0)) * exp(-self.labda_sum / self.K)
@@ -507,7 +507,7 @@ def experiment(setup, runs, summary_print=False, runs_print=False, latex_print=F
     return at_total, at_stats, occ_stats
 
 
-def setups(horizon, runs, summary_print=False, runs_print=False, latex_print=False, bar_print=False, alt_p):
+def setups(horizon, runs, summary_print=False, runs_print=False, latex_print=False, bar_print=False, alt_p=False):
 
     # setup = MDP(3.26, 0.34, 0.15, alt_p, horizon)
     # at_total_1, at_stats_1, occ_stats_1 = experiment(setup, runs, summary_print, runs_print, latex_print)
